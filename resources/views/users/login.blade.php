@@ -44,6 +44,7 @@
                     </div>
                     <div class="mb-3">
                         <a href="{{ route('users.showFormRegister') }}">Register account</a>
+                        <a href="{{ url('/auth/redirect/google') }}" class="btn btn-primary"><i class="fa fa-google"></i> Google</a>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>

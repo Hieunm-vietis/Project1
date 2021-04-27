@@ -9,6 +9,7 @@ use App\Http\Requests\User\Auth\RegisterUserRequest;
 use App\Services\User\Interfaces\UserServiceInterface;
 use Auth;
 use App\Models\User;
+use Laravel\Socialite\Facades\Socialite;
 
 class AuthController extends Controller
 {
@@ -52,5 +53,35 @@ class AuthController extends Controller
     public function setStatus()
     {
             dd('status');
+    }
+
+    public function redirect($provider)
+    {
+        return Socialite::driver($provider)->redirect();
+    }
+    
+    public function callback($provider)
+    {
+        $getInfo = Socialite::driver($provider)->stateless()->user();
+        dd($getInfo);
+        $user = $this->createUser($getInfo, $provider);
+        Auth::login($user);
+    
+        return redirect()->route('users.blog.index');
+    
+    }
+
+    function createUser($getInfo, $provider){
+        $user = User::where('provider_id', $getInfo->id)->first();
+
+        if (!$user) {
+            $user = User::create([
+                'name'     => $getInfo->name,
+                'email'    => $getInfo->email,
+                'provider' => $provider,
+                'provider_id' => $getInfo->id
+            ]);
+        }
+        return $user;
     }
 }

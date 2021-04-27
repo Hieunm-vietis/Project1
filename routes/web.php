@@ -18,6 +18,11 @@ Route::get('/users', 'User\AuthController@showFormLogin')->name('users.showFormL
 Route::post('/users', 'User\AuthController@login')->name('users.login.post');
 Route::get('/users/register', 'User\AuthController@showFormRegister')->name('users.showFormRegister');
 Route::post('/users/register', 'User\AuthController@register')->name('users.register.post');
+
+Route::get('/auth/redirect/{provider}', 'User\AuthController@redirect');
+Route::get('/callback/{provider}', 'User\AuthController@callback');
+
+
 Route::group(['namespace' => 'User', 'middleware' => 'user'], function () {
     Route::get('/users/setStatus', 'AuthController@setStatus')->name('users.setStatus');
     Route::get('/blogs/home', 'BlogsController@index')->name('users.blog.index');

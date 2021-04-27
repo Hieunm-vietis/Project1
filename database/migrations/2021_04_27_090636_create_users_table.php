@@ -21,6 +21,8 @@ class CreateUsersTable extends Migration
             $table->tinyInteger('status')->default(0)->comment('0=InActive, 1=Active');
             $table->string('avatar')->nullable();
             $table->string('password');
+            $table->string('provider_name')->nullable();
+            $table->string('provider_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
