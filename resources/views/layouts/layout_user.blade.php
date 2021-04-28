@@ -25,7 +25,7 @@
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
                     <a class="nav-link" aria-current="page" href="#">Home</a>
-                    <a class="nav-link" href="#">Profile</a>
+                    <a class="nav-link" href="{{ route('user.users.show', \Auth::user()->id) }}">Profile</a>
                     <a class="nav-link" href="#">My Blog</a>
                 </div>
             </div>

@@ -30,7 +30,7 @@ class AuthController extends Controller
         $email = $request->input('email');
     	$password = $request->input('password');
         if (Auth::attempt(['email' => $email, 'password' => $password])) {
-            return redirect()->route('users.blog.index');
+            return redirect()->route('user.blog.index');
         } else {
             return back()->withInput()->withErrors([
                 'errorCreareUser' => 'Wrong email or password'
@@ -45,8 +45,10 @@ class AuthController extends Controller
 
     public function register(RegisterUserRequest $request)
     {
-        if ($this->userService->storeUser($request)) {
-            return redirect()->route('users.showFormLogin');
+        $params = $request->only('name', 'email', 'password');
+
+        if ($this->userService->storeUser($params)) {
+            return redirect()->route('user.showFormLogin');
         } else {
             return back()->withInput()->withErrors([
                 'errorCreareUser' => 'Have an error while creating user'
@@ -57,9 +59,9 @@ class AuthController extends Controller
     public function setStatus(User $user)
     {
         if ($this->userService->setStatusUser($user)) {
-            return redirect()->route('users.showFormLogin'); 
+            return redirect()->route('user.showFormLogin'); 
         } else {
-            return redirect()->route('users.showFormLogin')->with(['message-error' => 'Have error when set status']);
+            return redirect()->route('user.showFormLogin')->with(['message-error' => 'Have error when set status']);
         } 
     }
 
@@ -75,7 +77,7 @@ class AuthController extends Controller
         $user = $this->createUser($getInfo, $provider);
         Auth::login($user);
     
-        return redirect()->route('users.blog.index');
+        return redirect()->route('user.blog.index');
     
     }
 

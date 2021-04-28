@@ -6,5 +6,6 @@ use Illuminate\Http\Request;
 
 interface AdminServiceInterface
 {
-    public function createAdmin($request);
+    public function createAdmin($params);
+    public function getAllAdmin();
 }

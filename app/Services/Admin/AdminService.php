@@ -8,13 +8,18 @@ use App\Services\Service;
 
 class AdminService extends Service implements AdminServiceInterface
 {
-    public function createAdmin($request)
+    public function createAdmin($params)
     {
         return Admin::create([
-            'name' => $request->input('name'),
-            'email' => $request->input('email'),
-            'password' => \Hash::make($request->input('password')),
-            'role' => $request->input('role')
+            'name' => $params['name'],
+            'email' => $params['email'],
+            'password' => \Hash::make($params['password']),
+            'role' => $params['role']
         ]);
+    }
+
+    public function getAllAdmin()
+    {
+        return Admin::all();
     }
 }

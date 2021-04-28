@@ -18,7 +18,9 @@ class AdminsController extends Controller
 
     public function index()
     {
-        return view('admins.admin.index');
+        $admins = $this->adminService->getAllAdmin();
+
+        return view('admins.admin.index', compact('admins'));
     }
 
     public function create()
@@ -28,7 +30,9 @@ class AdminsController extends Controller
 
     public function store(CreateAdminRequest $request)
     {
-        if ($this->adminService->createAdmin($request)) {
+        $params = $request->only('name', 'email', 'password', 'role');
+
+        if ($this->adminService->createAdmin($params)) {
             return back()->withSuccess('Create is successfuly');
         } else {
             return back()->withInput()->withErrors([

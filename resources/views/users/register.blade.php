@@ -22,7 +22,7 @@
                 <div class="text-center mt-5 mb-5 ">
                     <h1>Login</h1>
                 </div>
-                <form method="post" action="{{ route('users.register.post') }}">
+                <form method="post" action="{{ route('user.register.post') }}">
                     @csrf
                     <div class="mb-3">
                         <label for="name" class="form-label">Name</label>
@@ -61,7 +61,7 @@
                         @endif
                     </div>
                     <div class="mb-3">
-                        <a href="{{ route('users.showFormLogin') }}">Login</a>
+                        <a href="{{ route('user.showFormLogin') }}">Login</a>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>

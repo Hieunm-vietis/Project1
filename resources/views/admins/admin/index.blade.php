@@ -11,34 +11,49 @@
         
     </div>
     <div class="row justify-content-center mt-2">
-        <div class="col-8 float-left">
+        <div class="col-10 float-left">
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
+                        <th scope="col">id</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Role</th>
+                        <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    </tr>
-                    <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                    </tr>
-                    <tr>
-                    <th scope="row">3</th>
-                    <td colspan="2">Larry the Bird</td>
-                    <td>@twitter</td>
-                    </tr>
+                    @foreach ($admins as $admin)
+                        <tr>
+                            <td>{{ $admin->id }}</th>
+                            <td>{{ $admin->name }}</td>
+                            <td>{{ $admin->email }}</td>
+                            <td>
+                                
+
+
+
+                                @if ($admin->role == \App\Models\Admin::ROLE_SP_ADMIN)
+                                    <div class="rounded-3 bg-primary text-center" style="width:60px;">
+                                        @foreach (\App\Models\Admin::ROLES as $value => $name)
+                                            @if ($value == $admin->role)
+                                                <p class="text-white">{{ $name }}</p>        
+                                            @endif
+                                        @endforeach
+                                    </div>
+                                @endif
+                                @if ($admin->role == \App\Models\Admin::ROLE_ADMIN)
+                                    <div class="chip chip-primary" style="width:60px;">
+                                        @foreach (\App\Models\Admin::ROLES as $value => $name)
+                                            @if ($value == $admin->role)
+                                                <p class="text-white">{{ $name }}</p>        
+                                            @endif
+                                        @endforeach
+                                    </div>
+                                @endif
+                            </td>
+                        </tr>
+                     @endforeach
                 </tbody>
                 </table>
         </div>

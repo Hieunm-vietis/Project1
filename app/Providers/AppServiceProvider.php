@@ -10,7 +10,9 @@ class AppServiceProvider extends ServiceProvider
 {
     protected $applicationServices = [
         UserServices\Interfaces\UserServiceInterface::class => UserServices\UserService::class,
+        UserServices\Interfaces\BlogServiceInterface::class => UserServices\BlogService::class,
         AdminServices\Interfaces\AdminServiceInterface::class => AdminServices\AdminService::class,
+        AdminServices\Interfaces\BlogServiceInterface::class => AdminServices\BlogService::class,
     ];
     /**
      * Register any application services.

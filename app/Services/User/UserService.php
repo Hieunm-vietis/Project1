@@ -6,21 +6,22 @@ use App\Models\User;
 use App\Services\User\Interfaces\UserServiceInterface;
 use App\Services\Service;
 use App\Mail\SendMailSetStatus;
+use App\Notifications\SetStatusUser;
 
 class UserService extends Service implements UserServiceInterface
 {
-    public function storeUser($request)
+    public function storeUser($params)
     {
-        return \DB::transaction(function () use ($request) {
+        return \DB::transaction(function () use ($params) {
             $user = User::create([
-                'name' => $request->input('name'),
-                'email' => $request->input('email'),
-                'password' => \Hash::make($request->input('password')),
+                'name' => $params['name'],
+                'email' => $params['email'],
+                'password' => \Hash::make($params['password']),
             ]);
             
-            if ($user) {
-                $this->sendEmailToSetStatus($user);
-            }
+            // if ($user) {
+            //     $this->sendEmailToSetStatus($user);
+            // }
             
             return $user;
         });
@@ -40,6 +41,14 @@ class UserService extends Service implements UserServiceInterface
     public function sendEmailToSetStatus($user)
     {
         $params = route('users.setStatus', $user->id);
-        \Mail::to($user->email)->send(new SendMailSetStatus($user, $params));
+        $user->notify(new SetStatusUser($params));
+        // \Mail::to($user->email)->send(new SendMailSetStatus($user, $params));
+    }
+
+    public function show($user)
+    {
+        $blogs = $user->blogs()->get();
+        
+        return $blogs;
     }
 }

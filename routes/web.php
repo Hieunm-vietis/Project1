@@ -14,17 +14,23 @@ use Illuminate\Support\Facades\Route;
 */
 
 //user
-Route::get('/users', 'User\AuthController@showFormLogin')->name('users.showFormLogin');  
-Route::post('/users', 'User\AuthController@login')->name('users.login.post');
-Route::get('/users/register', 'User\AuthController@showFormRegister')->name('users.showFormRegister');
-Route::post('/users/register', 'User\AuthController@register')->name('users.register.post');
+Route::get('/users', 'User\AuthController@showFormLogin')->name('user.showFormLogin');  
+Route::post('/users', 'User\AuthController@login')->name('user.login.post');
+Route::get('/users/register', 'User\AuthController@showFormRegister')->name('user.showFormRegister');
+Route::post('/users/register', 'User\AuthController@register')->name('user.register.post');
 
-Route::get('/auth/redirect/{provider}', 'User\AuthController@redirect');
-Route::get('/callback/{provider}', 'User\AuthController@callback');
-Route::get('/users/setStatus/{user}', 'User\AuthController@setStatus')->name('users.setStatus');
+// Route::get('/auth/redirect/{provider}', 'User\AuthController@redirect');
+// Route::get('/callback/{provider}', 'User\AuthController@callback');
+// Route::get('/users/setStatus/{user}', 'User\AuthController@setStatus')->name('users.setStatus');
 
 Route::group(['namespace' => 'User', 'middleware' => 'user'], function () {
-    Route::get('/blogs/home', 'BlogsController@index')->name('users.blog.index');
+    //user
+    Route::get('/blogs/home', 'BlogsController@index')->name('user.blogs.index');
+    Route::get('/users/{user}/show', 'UsersController@show')->name('user.users.show');
+
+    //Blogs
+    Route::get('/blogs/{blog}/show', 'BlogsController@show')->name('user.blogs.show');
+    Route::get('/blogs/{blog}/edit', 'BlogsController@edit')->name('user.blogs.edit');
 });
 
 //admin

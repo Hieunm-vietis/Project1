@@ -22,7 +22,7 @@
                 <div class="text-center mt-5 mb-5 ">
                     <h1>Login</h1>
                 </div>
-                <form method="post" action="{{ route('users.login.post') }}">
+                <form method="post" action="{{ route('user.login.post') }}">
                     @csrf
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Email address</label>
@@ -43,8 +43,7 @@
                         @endif
                     </div>
                     <div class="mb-3">
-                        <a href="{{ route('users.showFormRegister') }}">Register account</a>
-                        <a href="{{ url('/auth/redirect/google') }}" class="btn btn-primary"><i class="fa fa-google"></i> Google</a>
+                        <a href="{{ route('user.showFormRegister') }}">Register account</a>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>

@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class UserAuthenticate
 {
@@ -17,6 +18,10 @@ class UserAuthenticate
     public function handle($request, Closure $next, $guard = "web")
     {
         if (!Auth::guard($guard)->check()) {
+            return redirect()->route('users.showFormLogin');
+        }
+
+        if (Auth::user()->status == User::STATUS_INVALID) {
             return redirect()->route('users.showFormLogin');
         }
 
