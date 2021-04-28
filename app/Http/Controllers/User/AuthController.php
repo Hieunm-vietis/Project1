@@ -32,7 +32,9 @@ class AuthController extends Controller
         if (Auth::attempt(['email' => $email, 'password' => $password])) {
             return redirect()->route('users.blog.index');
         } else {
-            dd(2);
+            return back()->withInput()->withErrors([
+                'errorCreareUser' => 'Wrong email or password'
+            ]);
         }
     }
 
@@ -44,15 +46,21 @@ class AuthController extends Controller
     public function register(RegisterUserRequest $request)
     {
         if ($this->userService->storeUser($request)) {
-            return view('blogs.index');
+            return redirect()->route('users.showFormLogin');
         } else {
-            dd(2);
+            return back()->withInput()->withErrors([
+                'errorCreareUser' => 'Have an error while creating user'
+            ]);
         }
     }
 
-    public function setStatus()
+    public function setStatus(User $user)
     {
-            dd('status');
+        if ($this->userService->setStatusUser($user)) {
+            return redirect()->route('users.showFormLogin'); 
+        } else {
+            return redirect()->route('users.showFormLogin')->with(['message-error' => 'Have error when set status']);
+        } 
     }
 
     public function redirect($provider)
@@ -63,7 +71,7 @@ class AuthController extends Controller
     public function callback($provider)
     {
         $getInfo = Socialite::driver($provider)->stateless()->user();
-        dd($getInfo);
+
         $user = $this->createUser($getInfo, $provider);
         Auth::login($user);
     
@@ -82,6 +90,7 @@ class AuthController extends Controller
                 'provider_id' => $getInfo->id
             ]);
         }
+
         return $user;
     }
 }

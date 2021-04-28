@@ -7,4 +7,5 @@ use Illuminate\Http\Request;
 interface UserServiceInterface
 {
     public function storeUser($request);
+    public function setStatusUser($user);
 }

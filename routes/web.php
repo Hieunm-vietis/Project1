@@ -21,16 +21,17 @@ Route::post('/users/register', 'User\AuthController@register')->name('users.regi
 
 Route::get('/auth/redirect/{provider}', 'User\AuthController@redirect');
 Route::get('/callback/{provider}', 'User\AuthController@callback');
-
+Route::get('/users/setStatus/{user}', 'User\AuthController@setStatus')->name('users.setStatus');
 
 Route::group(['namespace' => 'User', 'middleware' => 'user'], function () {
-    Route::get('/users/setStatus', 'AuthController@setStatus')->name('users.setStatus');
     Route::get('/blogs/home', 'BlogsController@index')->name('users.blog.index');
 });
 
 //admin
-Route::get('/admins/login', 'Admin\AuthController@showFormLogin')->name('admins.showFormLogin');
-Route::post('/admins/login', 'Admin\AuthController@login')->name('admins.login.post');
+Route::get('/admin/login', 'Admin\AuthController@showFormLogin')->name('admins.showFormLogin');
+Route::post('/admin/login', 'Admin\AuthController@login')->name('admins.login.post');
 Route::group(['namespace' => 'Admin', 'middleware' => 'admin'], function () {
-    Route::get('/admins/index', 'AdminsController@index')->name('admins.admin.index');
+    Route::get('/admin/index', 'AdminsController@index')->name('admins.admin.index');
+    Route::get('/admin/admins/create', 'AdminsController@create')->name('admins.admin.create');
+    Route::post('/admin/admins/store', 'AdminsController@store')->name('admins.admin.store');
 });

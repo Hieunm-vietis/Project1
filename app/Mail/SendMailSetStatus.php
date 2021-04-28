@@ -16,9 +16,10 @@ class SendMailSetStatus extends Mailable
      *
      * @return void
      */
-    public function __construct($user)
+    public function __construct($user, $params)
     {
         $this->user = $user;
+        $this->params = $params;
     }
 
     /**
@@ -29,7 +30,8 @@ class SendMailSetStatus extends Mailable
     public function build()
     {
         return $this->view('mails.set_status_user')->with([
-            'user' => $this->user
+            'user' => $this->user,
+            'params' => $this->params
         ]);
     }
 }

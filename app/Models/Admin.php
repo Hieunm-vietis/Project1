@@ -12,6 +12,14 @@ class Admin extends Authenticatable
 
     protected $table = 'admins';
 
+    public const ROLE_ADMIN = 0;
+    public const ROLE_SP_ADMIN = 1;
+
+    public const ROLES = [
+        self::ROLE_ADMIN => 'Admin',
+        self::ROLE_SP_ADMIN => 'Supper admin',
+    ];
+
     protected $fillable = [
         'name', 'email', 'password', 'role'
     ];

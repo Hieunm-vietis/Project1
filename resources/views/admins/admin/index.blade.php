@@ -6,7 +6,7 @@
             <h2>List Admin</h2>
         </div>
         <div class="col-12 float-left">
-            <button type="button" class="btn btn-success">New Admin</button>
+            <a type="button" href="{{ route('admins.admin.create') }}" class="btn btn-success">New Admin</a>
         </div>
         
     </div>

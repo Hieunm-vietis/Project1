@@ -18,16 +18,28 @@ class UserService extends Service implements UserServiceInterface
                 'password' => \Hash::make($request->input('password')),
             ]);
             
-            // if ($user) {
-            //     $this->sendEmailToSetStatus($user);
-            // }
+            if ($user) {
+                $this->sendEmailToSetStatus($user);
+            }
             
             return $user;
         });
     }
 
+    public function setStatusUser($user)
+    {
+        if ($user->status == User::STATUS_VALID) {
+            return $user;
+        }
+
+        return $user->update([
+            'status' => User::STATUS_VALID,
+        ]);
+    }
+
     public function sendEmailToSetStatus($user)
     {
-        \Mail::to($user->email)->send(new SendMailSetStatus($user));
+        $params = route('users.setStatus', $user->id);
+        \Mail::to($user->email)->send(new SendMailSetStatus($user, $params));
     }
 }
