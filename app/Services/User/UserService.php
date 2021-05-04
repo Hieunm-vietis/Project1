@@ -55,4 +55,34 @@ class UserService extends Service implements UserServiceInterface
 
         return [$blogs, $isFollow];
     }
+
+    public function followUser($user)
+    {
+        $follower = \Auth::user();
+
+        return $follower->followers()->attach($user->id);
+    }
+
+    public function unfollow($user)
+    {
+        $follower = \Auth::user();
+
+        return $follower->followers()->detach($user->id);
+    }
+
+    public function updateAvatar($fileImg)
+    {
+        $filename = time() . $fileImg->getClientOriginalName();
+
+        if ($fileImg->move('AvatarUser', $filename)) {
+            $user = \Auth::user();
+
+            return $user->update([
+                'avatar' => '/AvatarUser/' . $filename
+            ]);
+        } else {
+            return false;
+        }  
+        
+    }
 }

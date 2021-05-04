@@ -24,10 +24,14 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-link" aria-current="page" href="#">Home</a>
+                    <a class="nav-link" aria-current="page" href="{{ route('user.blogs.index') }}">Home</a>
                     <a class="nav-link" href="{{ route('user.users.show', \Auth::user()->id) }}">Profile</a>
-                    <a class="nav-link" href="#">My Blog</a>
+                    <a class="nav-link" href="{{ route('user.blogs.follow') }}">Follow</a>
+                    <a class="nav-link" href="{{ route('user.blogs.myblogs') }}">My Blog</a>
                 </div>
+            </div>
+            <div class="float-right">
+                <a class="nav-link text-secondary" href="{{ route('user.logout') }}">Logout</a>
             </div>
         </div>
     </nav>

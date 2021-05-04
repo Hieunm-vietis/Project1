@@ -12,17 +12,23 @@
 					<img src="{{ $blog->image }}" alt="" width="300px" height="150">
 				</div>
 				<div class="col-md-6 ml-4">
-					<div class="h5"> <span>{{ $blog->title }}</span> </div>
+					<div class="h5"> <span>{{ $blog->title }}</span>
 					- 
 					<span>
 						<a class="h5" style="text-decoration: none" href="{{ route('user.users.show', $blog->user->id) }}">
 							{{ $blog->user->name }}
 						</a>
 					</span>
-					<div> <p>{{ $blog->content }}</p></div>
+					<div>{{ $blog->content }}</div>
+                    <div class="mt-2">
+                        <div>
+                            <span><a type="button" style="text-decoration: none" href="{{ route('user.blogs.show', $blog->id) }}" >View >></a></span>
+                        </div>
+                    </div>
 				</div>
 			</div>
 			<hr>
+            @include('users.blog.partials.edit', ['blog' => $blog])
 		@endforeach
 	</div>
 </div>

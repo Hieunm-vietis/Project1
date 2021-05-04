@@ -13,18 +13,25 @@
             <span>{{ $user->email }}</span>
         </div>
         <div>
-            <img src="https://i.pinimg.com/originals/76/18/38/761838420398ec0b0b412b46b71f2ab2.jpg" class="rounded-circle" alt="...">
+            <img src="{{ $user->avatar }}" alt="no photo" height="150" width="150" class="rounded-circle">
         </div>
 	</div>
     
     @if (!$isFollow && \Auth::user()->id != $user->id)
         <div>
-            <button type="button" class="btn btn-info">+ Follow</button>
+            <a href="{{  route('user.users.follow', $user->id) }}" type="button" class="btn btn-info">+ Follow</a>
         </div>
     @endif
     @if ($isFollow && \Auth::user()->id != $user->id)
         <div>
-            <button type="button" class="btn btn-secondary">+ Unfollow</button>
+            <a href="{{  route('user.users.unfollow', $user->id) }}" type="button" class="btn btn-secondary">+ Unfollow</a>
+        </div>
+    @endif
+    @if (\Auth::user()->id == $user->id)
+        <div>
+            <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#updateAvatarModal">
+                Edit Avatar
+            </button>
         </div>
     @endif
     <hr>
@@ -56,4 +63,5 @@
 		</div>
 	</div>
 </div>
+@include('users.user.partials.update_avatar')
 @stop()
