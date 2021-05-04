@@ -23,7 +23,7 @@ Route::post('/users/register', 'User\AuthController@register')->name('user.regis
 // Route::get('/callback/{provider}', 'User\AuthController@callback');
 // Route::get('/users/setStatus/{user}', 'User\AuthController@setStatus')->name('users.setStatus');
 
-Route::group(['namespace' => 'User', 'middleware' => 'user'], function () {
+Route::group(['namespace' => 'User', 'middleware' => ['user', 'status']], function () {
     //user
     Route::get('/blogs/home', 'BlogsController@index')->name('user.blogs.index');
     Route::get('/users/{user}/show', 'UsersController@show')->name('user.users.show');

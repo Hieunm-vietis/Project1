@@ -16,21 +16,19 @@
             <img src="https://i.pinimg.com/originals/76/18/38/761838420398ec0b0b412b46b71f2ab2.jpg" class="rounded-circle" alt="...">
         </div>
 	</div>
-    @php
-        $isFollow = \App\Models\FollowUser::where('user_id', \Auth::user()->id)
-                        ->where('user_follow_id', $user->id)
-                        ->first();
-    @endphp
+    
     @if (!$isFollow && \Auth::user()->id != $user->id)
         <div>
             <button type="button" class="btn btn-info">+ Follow</button>
         </div>
     @endif
+    @if ($isFollow && \Auth::user()->id != $user->id)
+        <div>
+            <button type="button" class="btn btn-secondary">+ Unfollow</button>
+        </div>
+    @endif
     <hr>
 	<div class="col-12">
-    @php
-        $blogs = $user->blogs()->paginate(5);
-    @endphp
         @foreach ($blogs as $blog)
 			<div class="row mt-5">
 				<div class="col-md-3 mr-3">
@@ -54,7 +52,7 @@
 	</div>
 	<div class="col-md-12 justify-content-center">
 		<div>
-			{{ $blogs->links() }}
+            {{ $blogs->links() }}
 		</div>
 	</div>
 </div>
