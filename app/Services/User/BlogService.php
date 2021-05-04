@@ -10,8 +10,6 @@ class BlogService extends Service implements BlogServiceInterface
 {
     public function getAllBlogs()
     {
-        list($blogs, $isFollow) = $this->userService->show($user);
-
         return Blog::with('user')->paginate(5);
     }
 }
