@@ -30,7 +30,7 @@ class AuthController extends Controller
         $email = $request->input('email');
     	$password = $request->input('password');
         if (Auth::attempt(['email' => $email, 'password' => $password])) {
-            return redirect()->route('user.blog.index');
+            return redirect()->route('user.blogs.index');
         } else {
             return back()->withInput()->withErrors([
                 'errorCreareUser' => 'Wrong email or password'
@@ -77,7 +77,7 @@ class AuthController extends Controller
         $user = $this->createUser($getInfo, $provider);
         Auth::login($user);
     
-        return redirect()->route('user.blog.index');
+        return redirect()->route('user.blogs.index');
     
     }
 

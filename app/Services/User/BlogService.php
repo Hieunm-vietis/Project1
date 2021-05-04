@@ -10,6 +10,6 @@ class BlogService extends Service implements BlogServiceInterface
 {
     public function getAllBlogs()
     {
-        return Blog::paginate(5);
+        return Blog::with('user')->paginate(5);
     }
 }

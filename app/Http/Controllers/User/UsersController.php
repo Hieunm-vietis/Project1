@@ -18,6 +18,8 @@ class UsersController extends Controller
 
     public function show(User $user)
     {
-        return view('users.user.show', compact('user'));
+        list($blogs, $isFollow) = $this->userService->show($user);
+    
+        return view('users.user.show', compact('user', 'blogs', 'isFollow'));
     }
 }

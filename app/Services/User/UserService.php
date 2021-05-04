@@ -7,6 +7,7 @@ use App\Services\User\Interfaces\UserServiceInterface;
 use App\Services\Service;
 use App\Mail\SendMailSetStatus;
 use App\Notifications\SetStatusUser;
+use Illuminate\Support\Facades\DB;
 
 class UserService extends Service implements UserServiceInterface
 {
@@ -47,8 +48,11 @@ class UserService extends Service implements UserServiceInterface
 
     public function show($user)
     {
-        $blogs = $user->blogs()->get();
-        
-        return $blogs;
+        $blogs = $user->blogs()->paginate(5);
+        $isFollow = DB::table('follows')->where('user_id', \Auth::user()->id)
+                        ->where('user_follow_id', $user->id)
+                        ->first();
+
+        return [$blogs, $isFollow];
     }
 }

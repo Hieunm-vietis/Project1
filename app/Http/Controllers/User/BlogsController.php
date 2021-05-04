@@ -20,7 +20,7 @@ class BlogsController extends Controller
     {
         $blogs = $this->blogService->getAllBlogs();
 
-        return view('user.blogs.index', compact('blogs'));
+        return view('users.blog.index', compact('blogs'));
     }
 
     public function show(Blog $blog)
