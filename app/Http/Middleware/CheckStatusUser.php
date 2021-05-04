@@ -18,6 +18,8 @@ class CheckStatusUser
     public function handle($request, Closure $next)
     {
         if (Auth::user()->status == User::STATUS_INVALID) {
+            Auth::logout();
+
             return redirect()->route('user.showFormLogin');
         }
 
