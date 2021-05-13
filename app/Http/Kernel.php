@@ -66,5 +66,7 @@ class Kernel extends HttpKernel
         'user' => \App\Http\Middleware\UserAuthenticate::class,
         'admin' => \App\Http\Middleware\AdminAuthenticate::class,
         'status' => \App\Http\Middleware\CheckStatusUser::class,
+        'jwt' => \App\Http\Middleware\VerifyJWTToken::class,
+
     ];
 }

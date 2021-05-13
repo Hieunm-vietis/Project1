@@ -29,6 +29,22 @@ class BlogService extends Service implements BlogServiceInterface
         return $blogs;
     }
 
+    public function store($params, $fileImg)
+    {
+        $filename = time() . $fileImg->getClientOriginalName();
+
+        if ($fileImg->move('ImgBlog', $filename)) {
+            return Blog::create([
+                'title' => $params['title'],
+                'user_id' => \Auth::user()->id,
+                'content' => $params['content'],
+                'image' => '/ImgBlog/' . $filename
+            ]);
+        } else {
+            return false;
+        }  
+    }
+
     public function update($params, $blog)
     {
         return $blog->update([

@@ -42,7 +42,7 @@ class UsersController extends Controller
         }
     }
 
-    public function updateAvatar(UpdateAvatarRequest $request)
+    public function updateAvatar(Request $request)
     {
         $fileImg = $request->file('image');
         if ($this->userService->updateAvatar($fileImg)) {
@@ -51,7 +51,7 @@ class UsersController extends Controller
             ]);
         } else {
             return back()->withErrors([
-                'updateAvatar' => 'Have Error'
+                'updateAvatar' => 'Have'
             ]);
         }
     }

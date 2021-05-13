@@ -9,7 +9,7 @@ class Blog extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'title', 'content', 'image', 'user_id'
+        'title', 'content', 'image', 'user_id', 'id'
     ];
 
     public function user()

@@ -11,4 +11,5 @@ interface BlogServiceInterface
     public function getBlogsForMe();
     public function update($params, $blog);
     public function delete($blog);
+    public function store($params, $fileImg);
 }

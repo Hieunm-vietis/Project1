@@ -14,6 +14,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+
+
+Route::post('/register', 'AuthController@register');
+Route::post('/login', 'AuthController@login');
+Route::get('/forget_password', 'AuthController@forgetPassword');
+Route::post('/reset_password', 'AuthController@reset_password');
+Route::get('/logout', 'AuthController@logout');
+
+Route::group(['middleware' => ['jwt']], function () {
+    Route::get('/users', 'API\User\UsersController@index');
+    Route::get('/blogs', 'API\User\BlogsController@index');
+    Route::get('/blogs/search', 'API\User\BlogsController@search');
+    Route::post('/blogs/create', 'API\User\BlogsController@store');
 });
+

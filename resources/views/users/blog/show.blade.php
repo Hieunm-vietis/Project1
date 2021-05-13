@@ -18,9 +18,6 @@
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editBlogModal">
                 Edit
             </button>
-            <!-- <button type="button" href="" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteBlogModal">
-                Delete
-            </button> -->
             <a class="btn btn-danger" onclick="return confirm('Are you sure?')" href="{{ route('user.blogs.delete', $blog->id) }}">
                 Delete
             </a>

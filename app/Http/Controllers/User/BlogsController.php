@@ -25,6 +25,23 @@ class BlogsController extends Controller
         return view('users.blog.index', compact('blogs'));
     }
 
+    public function create()
+    {
+        return view('users.blog.create');
+    }
+
+    public function store(Request $request)
+    {
+        $params = $request->all();
+        $fileImg = $request->file('image');
+
+        if ($this->blogService->store($params, $fileImg)) {
+            dd(1);
+        } else {
+dd(2);
+        }
+    }
+
     public function show(Blog $blog)
     {
         return view('users.blog.show', compact('blog'));

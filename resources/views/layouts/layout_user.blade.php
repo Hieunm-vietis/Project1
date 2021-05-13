@@ -28,6 +28,7 @@
                     <a class="nav-link" href="{{ route('user.users.show', \Auth::user()->id) }}">Profile</a>
                     <a class="nav-link" href="{{ route('user.blogs.follow') }}">Follow</a>
                     <a class="nav-link" href="{{ route('user.blogs.myblogs') }}">My Blog</a>
+                    <a class="nav-link" href="{{ route('user.blogs.create') }}">New Blog</a>
                 </div>
             </div>
             <div class="float-right">
